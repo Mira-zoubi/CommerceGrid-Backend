@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import AramexProductRoutes from "./routes/AramexProductRoutes.js";
 import AppleProductRoutes from "./routes/AppleProductRoutes.js";
+import AmazonProductRoutes from "./routes/AmazonProductRoutes.js"
 import cors from "cors";
 
  
@@ -19,6 +20,7 @@ app.use("/uploads", express.static("uploads"));
 
 app.use("/api/aramex-products", AramexProductRoutes);
 app.use("/api/apple-products", AppleProductRoutes);
+app.use("/api/amazon-products", AmazonProductRoutes);
 
 mongoose.connect(process.env.CONN)
 .then((result)=>{
