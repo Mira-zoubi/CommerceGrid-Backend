@@ -44,3 +44,6 @@ const AppleProducts = mongoose.model(
 );
 
 export default AppleProducts;
+
+export default AppleProducts;
+

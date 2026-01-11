@@ -44,4 +44,6 @@ const AmazonProducts = mongoose.model(
   AmazonProductsSchema
 );
 
+
 export default AmazonProducts;
+
