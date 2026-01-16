@@ -6,11 +6,10 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-/* ================= GET MY CART ================= */
 router.get("/", protect, async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate("items.product");
-    // If no cart yet, return empty structure
+
     if (!cart) return res.json({ user: req.user._id, items: [] });
 
     res.json(cart);
@@ -19,9 +18,6 @@ router.get("/", protect, async (req, res) => {
   }
 });
 
-/* ================= ADD ITEM TO CART =================
-   body: { productId, productModel }
-*/
 router.post("/items", protect, async (req, res) => {
   const { productId, productModel } = req.body;
 
@@ -34,13 +30,11 @@ router.post("/items", protect, async (req, res) => {
   }
 
   try {
-    // Ensure user has ONE cart (create if missing)
     let cart = await Cart.findOne({ user: req.user._id });
     if (!cart) {
       cart = await Cart.create({ user: req.user._id, items: [] });
     }
 
-    // If item already exists (same product + model) -> increment quantity
     const existingIndex = cart.items.findIndex(
       (i) => i.product.toString() === productId && i.productModel === productModel
     );
@@ -57,7 +51,6 @@ router.post("/items", protect, async (req, res) => {
 
     await cart.save();
 
-    // Return populated cart
     const populatedCart = await Cart.findOne({ user: req.user._id }).populate("items.product");
     res.status(201).json(populatedCart);
   } catch (err) {
@@ -65,10 +58,7 @@ router.post("/items", protect, async (req, res) => {
   }
 });
 
-/* ================= UPDATE QUANTITY =================
-   PUT /api/cart/items/:itemId
-   body: { quantity }
-*/
+
 router.put("/items/:itemId", protect, async (req, res) => {
   const { quantity } = req.body;
 
@@ -93,7 +83,6 @@ router.put("/items/:itemId", protect, async (req, res) => {
   }
 });
 
-/* ================= DELETE ITEM ================= */
 router.delete("/items/:itemId", protect, async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id });

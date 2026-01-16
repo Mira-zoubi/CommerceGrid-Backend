@@ -5,7 +5,7 @@ const cartItemSchema = new mongoose.Schema(
     product: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      refPath: "items.productModel", // dynamic reference
+      refPath: "items.productModel",
     },
     productModel: {
       type: String,
@@ -18,7 +18,7 @@ const cartItemSchema = new mongoose.Schema(
       min: 1,
     },
   },
-  { _id: true } // keep _id for each item (needed for edit/delete)
+  { _id: true }
 );
 
 const cartSchema = new mongoose.Schema(
@@ -27,7 +27,7 @@ const cartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true, // ✅ ONE cart per user
+      unique: true, 
     },
     items: [cartItemSchema],
   },
