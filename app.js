@@ -14,8 +14,12 @@ import cartRoutes from "./routes/CartRoutes.js";
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",
+    "https://commerce-grid.vercel.app"
+  ]
 }));
+
 
 const PORT = process.env.PORT;
 app.use(express.json());
@@ -39,3 +43,4 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+  // "https://commerce-grid.vercel.app" 
