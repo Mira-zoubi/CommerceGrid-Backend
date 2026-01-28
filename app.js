@@ -9,9 +9,8 @@ import AmazonProductRoutes from "./routes/AmazonProductRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import cartRoutes from "./routes/CartRoutes.js";
 
-
-
 dotenv.config();
+
 const app = express();
 app.use(cors({
   origin: [
@@ -19,7 +18,6 @@ app.use(cors({
     "https://commerce-grid.vercel.app"
   ]
 }));
-
 
 const PORT = process.env.PORT;
 app.use(express.json());
@@ -43,4 +41,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-  // "https://commerce-grid.vercel.app" 
+
+
+ 

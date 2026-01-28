@@ -58,7 +58,6 @@ router.post("/items", protect, async (req, res) => {
   }
 });
 
-
 router.put("/items/:itemId", protect, async (req, res) => {
   const { quantity } = req.body;
 
@@ -82,6 +81,7 @@ router.put("/items/:itemId", protect, async (req, res) => {
     res.status(500).json({ message: "Failed to update quantity" });
   }
 });
+
 
 router.delete("/items/:itemId", protect, async (req, res) => {
   try {
